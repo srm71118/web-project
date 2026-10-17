@@ -1,28 +1,29 @@
 pipeline {
     agent any
-	 environment { 
-        LOVE = 'redhat'
+	environment { 
+        LINUX = 'redhat'
     }
 
     stages {
-        stage('get the code from github') {
+        stage('Hello') {
             steps {
-                 // Assuming you have your Ansible playbook in a SCM like Git
-                checkout scm
+                echo 'Hello World'
+				echo "calling pipeline level variable value is $LINUX"
             }
         }
 		stage('linux command') {
             steps {
-                sh 'cat index.html'
+                sh 'date'
             }
         }
-		stage('call linux play variba') {
-            steps {
-                sh 'echo my custom varibale value is $LOVE'
+		stage('print varible') {
+		environment { 
+        CUSTOM = 'jenkins'
+    }
+			steps {
+                sh 'cal'
+				echo "calling stage level variable value is $CUSTOM"
             }
         }
-		
     }
 }
-
-
