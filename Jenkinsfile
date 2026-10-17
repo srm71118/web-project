@@ -1,5 +1,8 @@
 pipeline {
     agent any
+	 environment { 
+        LOVE = 'redhat'
+    }
 
     stages {
         stage('get the code from github') {
@@ -13,6 +16,13 @@ pipeline {
                 sh 'cat index.html'
             }
         }
+		stage('call linux play variba') {
+            steps {
+                sh 'echo my custom varibale value is $LOVE'
+            }
+        }
 		
     }
 }
+
+
